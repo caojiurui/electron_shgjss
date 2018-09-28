@@ -1,0 +1,15 @@
+1.安装python 2x版本
+    https://www.python.org/ftp/python/2.7.15/python-2.7.15.amd64.msi
+
+2.安装微软构建 【管理员】
+    cnpm install windows-build-tools -g
+    npm config set msvs_version 2015 --g
+
+3.执行脚本
+    cnpm install sqlite3@latest --build-from-source --runtime=electron  --target_arch=x64 --target=2.0.9 --dist-url=https://atom.io/download/electron --save  --msvs_version=2015
+
+问题：electron MSBUILD : error MSB4132: 无法识别工具版本“2.0”。可用的工具版本为 "4.0"。
+解决：安装系统framework 2.0
+
+问题：MSBUILD : error MSB3428: 未能加载 Visual C++ 组件“VCBuild.exe
+解决：cnpm install –global –production windows-build-tools 【管理员】
