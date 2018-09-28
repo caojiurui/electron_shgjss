@@ -34,7 +34,7 @@ class WinsManage {
 		let name = keys[0], winId = keys[1]
 		let winObjs = this.winObjs.appWins[name]
 		if (winObjs && winObjs.destroy) { //主窗口存在,直接销毁
-			wins.destroy()
+			winObjs.destroy()
 			console.log('主窗口销毁：' + winKeys)
 		} else if (winObjs[winId] && winObjs[winId].destroy) { //子窗口存在,直接销毁
 			winObjs[winId].destroy()
@@ -184,6 +184,8 @@ class WinsManage {
 		WinRegManage.getAutoStartValue((result)=>{
 			contextMenu.items[1].checked = result
 		})
+
+
 	}
 }
 

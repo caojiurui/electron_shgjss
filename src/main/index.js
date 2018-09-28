@@ -1,9 +1,10 @@
 import {app} from 'electron'
-import { WinsManage } from './wins-manage'
 import './wins-ipc-main'
 import './task-schedule'
 import * as BusManageDBUtil from '../renderer/db/bus/manage.sql'
-import {CheckTableIsExist} from '../core/sqlite/init-db.sql'
+import { WinsManage } from './wins-manage'
+import { DialogManage } from './dialog-manage'
+import { CheckTableIsExist } from '../core/sqlite/init-db.sql'
 
 let path = require('path')
 
@@ -13,12 +14,11 @@ let path = require('path')
  */
 if (process.env.NODE_ENV !== 'development') {
 	global.__static = path.join(__dirname, '/static').replace(/\\/g, '\\\\')
-	global.__indexpath = '../../'
+	global.__indexpath = './resources/app/dist/electron'          //假如asar打包需要更改app名称
+	global.iconPath = './resources/app/build/icons/icon_1.ico'
 }else{
-	global.__indexpath = process.cwd()
+	global.iconPath = process.cwd() +'/build/icons/icon_1.ico'
 }
-global.iconPath = path.join(global.__indexpath, 'build', 'icons', 'icon_1.ico')
-
 
 global.winURL = process.env.NODE_ENV === 'development'
 		? `http://localhost:9080`

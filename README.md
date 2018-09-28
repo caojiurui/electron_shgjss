@@ -1,22 +1,18 @@
-# shgjss
+# 上海实时公交
 
-> An electron-vue project
+> electron-vue 项目
 
-#### Build Setup
+#### 项目构建
 
 ``` bash
 # install dependencies
-npm install /
+yran install （为了支持`electron-builder`）
 
 # serve with hot reload at localhost:9080
 npm run dev
 
 # build electron application for production
-npm run build
-
+npm run build:win
 
 ```
 
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
