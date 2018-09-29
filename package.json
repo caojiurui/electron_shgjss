@@ -16,15 +16,24 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
-    "asar": false,
+    "asar": true,
+    "asarUnpack":[
+      "./package.json"
+    ],
     "productName": "上海公交实时提醒",
     "appId": "xyz.nbjqr.shgjss",
     "directories": {
       "output": "build"
     },
     "files": [
-      "dist/electron/**/*",
-      "build/icons/**/*"
+      "dist/electron/**/*"
+    ],
+    "extraResources" :[
+      {
+        "from": "build/icons/icon_1.ico",
+        "to": "icon.ico",
+        "filter": ["**/*", "!win-unpacked/*.js"]
+      }
     ],
     "dmg": {
       "contents": [

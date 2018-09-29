@@ -1,10 +1,10 @@
 import {app} from 'electron'
 import './wins-ipc-main'
 import './task-schedule'
-import * as BusManageDBUtil from '../renderer/db/bus/manage.sql'
 import { WinsManage } from './wins-manage'
 import { DialogManage } from './dialog-manage'
 import { CheckTableIsExist } from '../core/sqlite/init-db.sql'
+import * as BusManageDBUtil from '../renderer/db/bus/manage.sql'
 
 let path = require('path')
 
@@ -14,10 +14,9 @@ let path = require('path')
  */
 if (process.env.NODE_ENV !== 'development') {
 	global.__static = path.join(__dirname, '/static').replace(/\\/g, '\\\\')
-	global.__indexpath = './resources/app/dist/electron'          //假如asar打包需要更改app名称
-	global.iconPath = './resources/app/build/icons/icon_1.ico'
+	global.iconPath = process.cwd() + '/resources/icon.ico'  //打包时对ico进行了拷贝
 }else{
-	global.iconPath = process.cwd() +'/build/icons/icon_1.ico'
+	global.iconPath = process.cwd() + '/build/icons/icon_1.ico'
 }
 
 global.winURL = process.env.NODE_ENV === 'development'

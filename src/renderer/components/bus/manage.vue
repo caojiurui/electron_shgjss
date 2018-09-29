@@ -43,7 +43,7 @@
             <el-table-column
                     prop="timing"
                     label="提前提醒时长(分)"
-                    width="90">
+                    width="80">
             </el-table-column>
             <!--<el-table-column-->
                     <!--prop="remark"-->
@@ -53,7 +53,7 @@
             <el-table-column
                     prop="next_remind_time"
                     label="下次提醒时间"
-                    width="80">
+                    width="90">
             </el-table-column>
             <el-table-column
                     label="操作"

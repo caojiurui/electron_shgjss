@@ -18,6 +18,7 @@
 		methods: {
 			showNotiify(){
 				let _this = this
+
                 this.$notify({
                     duration: 0,
                     position: 'bottom-right',
@@ -26,7 +27,7 @@
                     message: `<div class="bus-prompt-box">
                 <audio  style="display: none" autoplay="autoplay"
                         controls="controls" loop="loop" preload="auto"
-                                src="../../../../static/audio/xiaohai.mp3">
+                                src="./static/audio/reminder.mp3">
                 </audio>
                 <i class="fa fa-bell-o"></i>
                 <div class="content">

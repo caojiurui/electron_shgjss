@@ -1,8 +1,6 @@
 const Q = require('q')
 const _sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const pathDB = path.join(process.cwd() , 'shgjss.db')
-const _db = new _sqlite3.Database(pathDB);
+const _db = new _sqlite3.Database(process.cwd() + '/shgjss.db');
 
 //数据库工具类
 class DBUtil {
