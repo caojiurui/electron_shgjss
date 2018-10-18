@@ -5,7 +5,7 @@
 import axios from 'axios'
 import * as BusManageDBUtil from '../renderer/db/bus/manage.sql'
 import { WinsManage } from './wins-manage'
-import { TASK_SCHEDULE } from '../core/constants/constant'
+import { TASK_SCHEDULE,API_DOMAINS } from '../core/constants/constant'
 const taskSchedule = require('node-schedule')
 const qs = require('qs');
 
@@ -77,14 +77,14 @@ class TaskScheduleManage {
 						let winId = 'bus_remind_'+remind.id //窗口id
 						// 发起请求获取详情
 						axios.post(
-								'http://shanghaicity.openservice.kankanews.com/public/bus/Getstop',
+								API_DOMAINS.BUS + '/public/bus/Getstop',
 								qs.stringify({ sid : remind.code,
 									stopid : remind.num,
 									stoptype : remind.stoptype
 								}),{
 									// headers: {       //三种头部请求都不行,懵逼,先改用了qs
 									// 	'Content-Type': 'application/json',
-                  //   'Content-Type': 'multipart/form-data',
+									//   'Content-Type': 'multipart/form-data',
 									// 	'Content-Type': 'application/x-www-form-urlencoded'
 									// }
 								}

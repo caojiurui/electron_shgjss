@@ -5,10 +5,10 @@
         <el-form ref="form" label-width="80px">
 
             <el-form-item label="线路名称">
-                <el-select v-model="currRoad.id" filterable placeholder="请选择线路名称" @change="changeRoad">
+                <el-select v-model="currRoadId" filterable placeholder="请选择线路名称" @change="changeRoad">
                     <el-option
                             v-for="(rd,i) of road_items"
-                            :key="rd.id"
+                            :key="rd.id+'_'+i+'_'+rd.name"
                             :label="rd.name"
                             :value="rd.id">
                     </el-option>
@@ -62,7 +62,7 @@
                 </el-time-select>
             </el-form-item>
             <el-form-item label="提前时长">
-                <el-input type="number" v-model="timing" style="width: 223px"></el-input>
+                <el-input type="number" v-model="timing" min="1" max="30" style="width: 223px"></el-input>
                 （分）
             </el-form-item>
             <el-form-item label="提醒内容">
@@ -84,6 +84,7 @@
 	export default {
 		data() {
 			return {
+				currRoadId : '',            //当前选中线路
 				road_items: [],             //线路列表 [id,name]
 				pickerOptions: {
 					start: '04:00',
@@ -105,7 +106,7 @@
                 // this.loadingInstance = this.$loading({ fullscreen: true })     //loading ...
 				//根据id获取线路 {id,name}
 				this.currRoad = this.road_items.find((rd) => {
-					return rd.id == this.currRoad.id
+					return rd.id == this.currRoadId
 				});
 				Object.assign(this.currRoad, {
 					'code': '',                  //线路code
@@ -167,8 +168,8 @@
 				}
 				GetBusRoadDetail(_this.currRoad.code, _this.stopType).then(resp => {
 					//获取开始站点和结束站点
-					let $downgoing = $(resp).find('.downgoing')
-					let $upgoing = $(resp).find('.upgoing')
+					let $downgoing = $(resp).find('.upgoing:eq(0)')
+					let $upgoing = $(resp).find('.upgoing:eq(1)')
 					_this.currRoad.z_first_last_time = $downgoing.find(' .time .s').text() + '-' + $downgoing.find(' .time .m').text()
 					_this.currRoad.f_first_last_time = $upgoing.find(' .time .s').text() + '-' + $upgoing.find(' .time .m').text()
 					_this.currRoad.z_first_last_station = $downgoing.find('span:eq(0)').text() + '-' + $downgoing.find('span:eq(1)').text()
@@ -264,13 +265,16 @@
 	            BusNewDBUtil.insertBusRoadRemind(roadRemindObj,
                                                  _this.stopType,
                                                  _this.remindStationName).then(()=>{
-			            _this.$message({
-				            type:'success',
-				            message:'添加线路提醒成功',
-				            onClose(){
-					            _this.onReturnList()    //返回主页
-				            }
-			            });
+		                _this.$msgbox({
+			                showClose : false,
+		                	title : '操作提醒',
+			                message : '添加线路成功！',
+			                type: 'success',
+                            confirmButtonText: '返回列表',
+                            callback: action => {
+	                            _this.onReturnList()    //返回主页
+                            }
+                        });
                 }).catch(()=>{
                 	_this.$message.error('添加线路失败！')
                 })

@@ -61,15 +61,15 @@ const deleteRoadRemindById = (id) => {
 //停止提醒
 const updateRemindStatusById = (id,status) => {
 	return DBUtil.updateByCond('bus_road_remind',
-															{status},
-															{'bus_road_remind_id':id})
+								{status,next_remind_time : null},
+								{'bus_road_remind_id':id})
 }
 
 //设置下次提醒时间
 const updateNextRemindTimeById = (id,next_remind_time) => {
 	return DBUtil.updateByCond('bus_road_remind',
-															{next_remind_time},
-															{'bus_road_remind_id':id})
+								{next_remind_time},
+								{'bus_road_remind_id':id})
 }
 
 //获取可提醒数量

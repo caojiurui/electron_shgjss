@@ -1,6 +1,6 @@
 import request from '@/utils/request-util'
-
-let busBase = "http://shanghaicity.openservice.kankanews.com"
+import { API_DOMAINS } from '../../core/constants/constant'
+let busBase = API_DOMAINS.BUS
 
 //得到线路code
 export function GetBusRoadCode(roadName) {
@@ -14,7 +14,7 @@ export function GetBusRoadCode(roadName) {
 //得到线路详情(正方向)
 export function GetBusRoadDetail(roadCode,stopType) {
 	return request({
-		url: busBase + '/public/bus/mes/sid/'+roadCode+'/stoptype/'+(stopType || 0),
+		url: busBase + '/public/bus/mes/sid/'+roadCode+'?stoptype='+(stopType || 0),
 		method : 'get'
 	})
 }

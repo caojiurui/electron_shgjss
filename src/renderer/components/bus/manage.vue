@@ -9,7 +9,7 @@
         <el-table
                 :data="tableData"
                 style="width: 100%"
-                height="455">
+                height="435">
             <el-table-column
                     fixed
                     label="线路"
@@ -96,6 +96,7 @@
                 BusManageDBUtil.updateRemindStatusById(row.id, status).then( ()=>{
 	                this.$message.success((row.status ? '停止': '设置') + '提醒成功！')
 	                row.status = status
+                    row.next_remind_time = null
                 },()=>{
 	                this.$message.error((row.status ? '停止': '设置') + '提醒成功！')
                 })
@@ -103,12 +104,22 @@
 			addRemindClick() {
 				this.$router.push('/bus/new')
 			},
+			refreshData(){
+				BusManageDBUtil.getAllRoadRemindList().then( (rows)=>{
+					this.tableData = rows
+				})
+            }
 		},
 		beforeCreate() {
-            BusManageDBUtil.getAllRoadRemindList().then( (rows)=>{
-                this.tableData = rows
-            })
+			let _this = this
+            //监听数据更新
+			this.$electron.ipcRenderer.on('reminder-data-update', (event, args) => {
+				_this.refreshData()
+			})
 		},
+        created(){
+	        this.refreshData()
+        },
 		mounted() {
 			WinUtils.setSize({height: 600, width: 850, position: 'center'})
 		}

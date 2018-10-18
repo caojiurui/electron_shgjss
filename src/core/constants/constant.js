@@ -8,4 +8,9 @@ let TASK_SCHEDULE = {
 	BUS_REMIND : 'BUS_REMIND'
 }
 
-export { DICT_TYPE , TASK_SCHEDULE}
+//接口api地址
+let API_DOMAINS = {
+	BUS : 'https://shanghaicity.openservice.kankanews.com'
+}
+
+export { DICT_TYPE , TASK_SCHEDULE , API_DOMAINS}

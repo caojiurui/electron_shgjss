@@ -6,8 +6,8 @@
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
-    "build:win": "node .electron-vue/build.js && electron-builder --platform=win32 --arch=x64",
-    "build:dir": "node .electron-vue/build.js && electron-builder --dir --platform=win32 --arch=x64",
+    "build:win": "node .electron-vue/build.js && electron-builder --platform=win32 --arch=ia32",
+    "build:dir": "node .electron-vue/build.js && electron-builder --dir --platform=win32 --arch=ia32",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "dev": "node .electron-vue/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",
@@ -22,6 +22,10 @@
     ],
     "productName": "上海公交实时提醒",
     "appId": "xyz.nbjqr.shgjss",
+    "nsis":{
+      "oneClick":false,
+      "allowToChangeInstallationDirectory" : true
+    },
     "directories": {
       "output": "build"
     },
@@ -30,7 +34,7 @@
     ],
     "extraResources" :[
       {
-        "from": "build/icons/icon_1.ico",
+        "from": "build/icons/icon.ico",
         "to": "icon.ico",
         "filter": ["**/*", "!win-unpacked/*.js"]
       }
@@ -50,14 +54,8 @@
         }
       ]
     },
-    "mac": {
-      "icon": "build/icons/icon_1.icns"
-    },
     "win": {
-      "icon": "build/icons/icon_1.ico"
-    },
-    "linux": {
-      "icon": "build/icons"
+      "icon": "build/icons/icon.ico"
     }
   },
   "dependencies": {

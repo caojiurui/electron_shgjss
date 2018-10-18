@@ -38,7 +38,7 @@ class WindowUtil {
 	// 设置窗口大小
 	static setSize(options) {
 		const browserWindow = remote.getCurrentWindow();
-		browserWindow.setSize(options.width,options.height,options.animate || true);
+		browserWindow.setContentSize(options.width,options.height,options.animate || true);
 		if(options.position == 'center'){
 			browserWindow.setPosition((width-options.width)/2,(height-options.height)/2,options.animate || true);
 		}

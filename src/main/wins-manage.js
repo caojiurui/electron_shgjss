@@ -160,7 +160,7 @@ class WinsManage {
 					_this.winObjs.appWins.main.show()
 					_this.winObjs.appWins.main.setSkipTaskbar(true)
 				}
-			},/*{
+			},{
 				label: '开机启动',
 				type : 'checkbox',
 				click() {
@@ -170,7 +170,7 @@ class WinsManage {
 						WinRegManage.disableAutoStart()
 					}
 				}
-			},*/ {
+			}, {
 				label: '退出',
 				click() {
 					WinsManage.exitApp()

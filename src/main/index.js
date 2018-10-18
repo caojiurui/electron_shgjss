@@ -1,3 +1,4 @@
+let path = require('path')
 import {app} from 'electron'
 import './wins-ipc-main'
 import './task-schedule'
@@ -6,17 +7,15 @@ import { DialogManage } from './dialog-manage'
 import { CheckTableIsExist } from '../core/sqlite/init-db.sql'
 import * as BusManageDBUtil from '../renderer/db/bus/manage.sql'
 
-let path = require('path')
-
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
 	global.__static = path.join(__dirname, '/static').replace(/\\/g, '\\\\')
-	global.iconPath = process.cwd() + '/resources/icon.ico'  //打包时对ico进行了拷贝
+	global.iconPath = process.resourcesPath + '/icon.ico'  //打包时对ico进行了拷贝
 }else{
-	global.iconPath = process.cwd() + '/build/icons/icon_1.ico'
+	global.iconPath = process.cwd() + '/build/icons/icon.ico'
 }
 
 global.winURL = process.env.NODE_ENV === 'development'

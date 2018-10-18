@@ -42,6 +42,7 @@
                         let timestamp = new Date().getTime() + _this.remindData.time*1000 + 3*60*1000
                         let nextRemindTime = new Date(timestamp).format('yyyy-MM-dd hh:mm:ss')
 	                    updateNextRemindTimeById(_this.remindData.id,nextRemindTime).then(()=>{
+		                    _this.$electron.ipcRenderer.send('notify-reminder-data-update')
                             WinUtils.close();   //窗口关闭
                         })
                     },

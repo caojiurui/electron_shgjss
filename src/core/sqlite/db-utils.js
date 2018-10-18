@@ -1,11 +1,14 @@
 const Q = require('q')
+const path = require('path')
 const _sqlite3 = require('sqlite3').verbose();
-const _db = new _sqlite3.Database(process.cwd() + '/shgjss.db');
+let dbPath = process.cwd() + '/shgjss.db'
+if (process.env.NODE_ENV !== 'development') {
+	dbPath =  path.join(process.resourcesPath,'../','shgjss.db')
+}
+const _db = new _sqlite3.Database(dbPath);
 
 //数据库工具类
 class DBUtil {
-
-
 
 	/******************* 新增数据（封装） ********************/
 
